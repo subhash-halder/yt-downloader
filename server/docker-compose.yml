@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # Python Flask backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: yt-ripper-backend
+    restart: unless-stopped
+    volumes:
+      # Persist downloads temporarily
+      - ./downloads:/app/downloads
+    environment:
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
+    networks:
+      - yt-ripper-network
+    # Not exposed directly, only through nginx
+    expose:
+      - "5000"
+
+  # Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: yt-ripper-nginx
+    restart: unless-stopped
+    ports:
+      - "5000:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+    networks:
+      - yt-ripper-network
+
+networks:
+  yt-ripper-network:
+    driver: bridge
+

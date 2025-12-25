@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generate Icons</title>
+  <style>
+    body { font-family: sans-serif; padding: 40px; background: #1a1a25; color: white; }
+    .icon { margin: 20px; display: inline-block; text-align: center; }
+    canvas { border: 1px solid #333; background: transparent; }
+    a { display: block; margin-top: 10px; color: #ff3366; }
+  </style>
+</head>
+<body>
+  <h1>Icon Generator for YT Audio Ripper</h1>
+  <p>Right-click each canvas and save as PNG with the corresponding filename.</p>
+  
+  <div class="icon">
+    <canvas id="icon16" width="16" height="16"></canvas>
+    <p>icon16.png</p>
+  </div>
+  
+  <div class="icon">
+    <canvas id="icon32" width="32" height="32"></canvas>
+    <p>icon32.png</p>
+  </div>
+  
+  <div class="icon">
+    <canvas id="icon48" width="48" height="48"></canvas>
+    <p>icon48.png</p>
+  </div>
+  
+  <div class="icon">
+    <canvas id="icon128" width="128" height="128"></canvas>
+    <p>icon128.png</p>
+  </div>
+
+  <script>
+    function drawIcon(ctx, size) {
+      const s = size / 128;
+      
+      // Background gradient
+      const bgGrad = ctx.createLinearGradient(0, 0, size, size);
+      bgGrad.addColorStop(0, '#FF3366');
+      bgGrad.addColorStop(1, '#FF6B35');
+      
+      // Main circle
+      ctx.beginPath();
+      ctx.arc(64 * s, 64 * s, 60 * s, 0, Math.PI * 2);
+      ctx.fillStyle = bgGrad;
+      ctx.fill();
+      
+      // Inner disc
+      ctx.beginPath();
+      ctx.arc(64 * s, 64 * s, 40 * s, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,0,0,0.2)';
+      ctx.fill();
+      
+      // Center
+      ctx.beginPath();
+      ctx.arc(64 * s, 64 * s, 12 * s, 0, Math.PI * 2);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+      
+      ctx.beginPath();
+      ctx.arc(64 * s, 64 * s, 8 * s, 0, Math.PI * 2);
+      ctx.fillStyle = bgGrad;
+      ctx.fill();
+      
+      ctx.beginPath();
+      ctx.arc(64 * s, 64 * s, 4 * s, 0, Math.PI * 2);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+      
+      // Download arrow
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 5 * s;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      
+      ctx.beginPath();
+      ctx.moveTo(64 * s, 45 * s);
+      ctx.lineTo(64 * s, 75 * s);
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.moveTo(52 * s, 65 * s);
+      ctx.lineTo(64 * s, 77 * s);
+      ctx.lineTo(76 * s, 65 * s);
+      ctx.stroke();
+    }
+    
+    [16, 32, 48, 128].forEach(size => {
+      const canvas = document.getElementById('icon' + size);
+      const ctx = canvas.getContext('2d');
+      drawIcon(ctx, size);
+    });
+  </script>
+</body>
+</html>
+

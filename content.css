@@ -1,0 +1,57 @@
+/* Styles for the injected download button on YouTube */
+
+.yt-audio-ripper-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  margin-right: 8px;
+  background: linear-gradient(135deg, #ff3366 0%, #ff6b35 100%);
+  border: none;
+  border-radius: 20px;
+  font-family: 'YouTube Sans', 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(255, 51, 102, 0.3);
+  vertical-align: middle;
+}
+
+.yt-audio-ripper-download-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 51, 102, 0.4);
+}
+
+.yt-audio-ripper-download-btn:active,
+.yt-audio-ripper-download-btn.clicked {
+  transform: scale(0.95);
+}
+
+.yt-audio-ripper-download-btn svg {
+  flex-shrink: 0;
+}
+
+.yt-audio-ripper-download-btn span {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* Dark mode adjustments (YouTube dark theme) */
+html[dark] .yt-audio-ripper-download-btn,
+[dark] .yt-audio-ripper-download-btn {
+  box-shadow: 0 2px 12px rgba(255, 51, 102, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+  .yt-audio-ripper-download-btn span {
+    display: none;
+  }
+  
+  .yt-audio-ripper-download-btn {
+    padding: 8px 12px;
+  }
+}
+

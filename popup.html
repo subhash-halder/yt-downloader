@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YT Audio Ripper</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Animated background -->
+    <div class="bg-gradient"></div>
+    <div class="bg-noise"></div>
+    
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+            <circle cx="12" cy="12" r="3" fill="currentColor"/>
+            <path d="M12 2V6M12 18V22M2 12H6M18 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="logo-text">YT Audio Ripper</span>
+      </div>
+      <div class="version">v1.0</div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main">
+      <!-- Status indicator -->
+      <div id="status-section" class="status-section">
+        <div id="status-indicator" class="status-indicator">
+          <div class="status-dot"></div>
+          <span id="status-text">Checking page...</span>
+        </div>
+      </div>
+
+      <!-- Video info card -->
+      <div id="video-card" class="video-card hidden">
+        <div class="video-thumbnail">
+          <img id="video-thumb" src="" alt="Video thumbnail">
+          <div class="duration-badge" id="video-duration">--:--</div>
+        </div>
+        <div class="video-info">
+          <h2 id="video-title" class="video-title">Video Title</h2>
+          <p id="video-channel" class="video-channel">Channel Name</p>
+        </div>
+      </div>
+
+      <!-- Quality selector -->
+      <div id="quality-section" class="quality-section hidden">
+        <label class="quality-label">Audio Quality</label>
+        <div class="quality-options">
+          <button class="quality-btn" data-quality="128">128 kbps</button>
+          <button class="quality-btn active" data-quality="192">192 kbps</button>
+          <button class="quality-btn" data-quality="320">320 kbps</button>
+        </div>
+      </div>
+
+      <!-- Download button -->
+      <button id="download-btn" class="download-btn hidden">
+        <span class="btn-content">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3V16M12 16L7 11M12 16L17 11" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 20H21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="btn-text">Download MP3</span>
+        </span>
+        <span class="btn-loader hidden">
+          <svg class="spinner" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+          </svg>
+          <span id="progress-text">Converting...</span>
+        </span>
+      </button>
+
+      <!-- Progress bar -->
+      <div id="progress-section" class="progress-section hidden">
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <div class="progress-info">
+          <span id="progress-status">Preparing...</span>
+          <span id="progress-percent">0%</span>
+        </div>
+      </div>
+
+      <!-- Error message -->
+      <div id="error-section" class="error-section hidden">
+        <div class="error-icon">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 7V13M12 16V17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p id="error-message">An error occurred</p>
+        <button id="retry-btn" class="retry-btn">Try Again</button>
+      </div>
+
+      <!-- Not on YouTube message -->
+      <div id="not-youtube" class="not-youtube-section hidden">
+        <div class="not-youtube-icon">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" stroke-width="2"/>
+            <path d="M10 9L15 12L10 15V9Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>Navigate to YouTube</h3>
+        <p>Open a YouTube video to download its audio as MP3</p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <a href="#" id="history-link" class="footer-link">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        History
+      </a>
+      <a href="#" id="settings-link" class="footer-link">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 2V4M12 20V22M2 12H4M20 12H22M4.93 4.93L6.34 6.34M17.66 17.66L19.07 19.07M4.93 19.07L6.34 17.66M17.66 6.34L19.07 4.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Settings
+      </a>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
+
